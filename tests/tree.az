@@ -1,0 +1,21 @@
+/* An example of binary trees. */
+
+def printtree(t)
+{
+	if (type(t) != "table")
+		print(t+" ");
+	else
+	{
+		printtree(t["left"]);
+		printtree(t["right"]);
+	}
+}
+
+a = [];
+a["right"] = "aright";
+b = [];
+b["left"] = "bleft";
+b["right"] = "bright";
+a["left"] = b;
+printtree(a);
+println("hello");

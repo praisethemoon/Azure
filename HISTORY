@@ -1,0 +1,16 @@
+Azure 0.12
+  November 19, 2005
+  -------------------------------
+  + added the "use" statement
+  ! fixed several bugs of memory management
+
+This is Azure 0.1.
+  September 19, 2005
+  -------------------------------
+  + dynamic typing
+  + garbage collection
+  + high order functions
+  + coroutines
+  + exception handling
+  + dynamic module loading
+  + stand-alone executable compilation

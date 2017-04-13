@@ -1,0 +1,23 @@
+/* Coroutine example 3. */
+
+def dosomething(n)
+{
+	yield n+1;
+	println("Exiting dosomething.");
+}
+
+def dosomethingelse(n)
+{
+	yield sqrt(n);
+	println("Exiting dosomething.");
+}
+
+cr1 = create(dosomething, 1, 1234);
+println(resume(cr1));
+println("back to the main thread");
+resume(cr1);
+
+cr2 = create(dosomethingelse, 1, 1234);
+println(resume(cr2));
+println("back to the main thread");
+resume(cr2);

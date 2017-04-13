@@ -1,0 +1,21 @@
+/* Input and integer and calculate its factorial. */
+
+def factor(n)
+{
+	if (n<0)
+		return "Illegal input.";
+	if (n==0 || n==1)
+		return 1;
+	else
+		return n*factor(n-1);
+}
+
+while (1)
+{
+	print("Input an integer:");
+	a = inputi();
+	if (a == -1)
+		break;
+	print("Its factor is:");
+	print(factor(a)+"\n");
+}

@@ -1,0 +1,31 @@
+/* Representing complex numbers using arrays. */
+
+a = [1.0, 2.5];		/* complex number 1.0+2.5i */
+b = [2.0, 4.0];		/* complex number 2.0+4.0i */
+
+/* Add two complex numbers. */
+def addcom(a,b)
+{
+	c = [];
+	c[0] = a[0]+b[0];
+	c[1] = a[1]+b[1];
+	return c;
+}
+
+/* Multiply two complex numbers. */
+def mulcom(a,b)
+{
+	c = [];
+	c[0] = a[0]*b[0]-a[1]*b[1];
+	c[1] = a[0]*b[1]+a[1]*b[0];
+	return c;
+}
+
+/* Print a complex number. */
+def printcom(a)
+{
+	println(a[0]+"+"+a[1]+"i");
+}
+
+printcom(addcom(a, b));
+printcom(mulcom(a, b));

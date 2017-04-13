@@ -1,0 +1,22 @@
+/* A test of the math library functions. */
+
+sum = 0;
+num = 10;
+srand(time(0));
+for (i=0; i<num; i++)
+{
+	sum += ran = rand();
+	print(ran+"\n");
+}
+
+print("average "+sum/num+"\n");
+
+print(atan(tan(3.14159/2))+"\n");
+
+print(log10(100)+"\n");
+
+print(pow(10,2)+"\n");
+
+print(sqrt(sqrt(10000))+"\n");
+
+println(++num+1.23e2+sqrt(5*8/4)-55.0);

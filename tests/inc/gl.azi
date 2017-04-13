@@ -1,0 +1,88 @@
+/* Azure OpenGL binding include file. */
+
+/* OpenGL constants and functions. */
+GL_COLOR_BUFFER_BIT = 0x00004000;
+GL_DEPTH_BUFFER_BIT = 0x00000100;
+GL_TRIANGLES = 0x0004;
+GL_FLAT = 0x1D00;
+GL_SMOOTH = 0x1D01;
+GL_DEPTH_TEST = 0x0B71;
+
+GL_FRONT = 0x0404;
+GL_BACK = 0x0405;
+GL_FRONT_AND_BACK = 0x0408;
+
+GL_POINT = 0x1B00;
+GL_LINE  = 0x1B01;
+GL_FILL  = 0x1B02;
+
+GL_LIGHT0 = 0x4000;
+GL_LIGHT1 = 0x4001;
+GL_LIGHT2 = 0x4002;
+GL_LIGHT3 = 0x4003;
+GL_LIGHT4 = 0x4004;
+GL_LIGHT5 = 0x4005;
+GL_LIGHT6 = 0x4006;
+GL_LIGHT7 = 0x4007;
+
+GL_AMBIENT = 0x1200;
+GL_DIFFUSE = 0x1201;
+GL_SPECULAR = 0x1202;
+GL_POSITION = 0x1203;
+GL_LIGHTING = 0x0B50;
+
+/* Virtual keycodes for Win32. */
+VK_ESCAPE = 0x1B;
+VK_CAPITAL = 0x14;
+VK_F1 = 0x70;
+VK_F2 = 0x71;
+VK_F3 = 0x72;
+VK_F4 = 0x73;
+VK_F5 = 0x74;
+VK_F6 = 0x75;
+VK_F7 = 0x76;
+VK_F8 = 0x77;
+VK_F9 = 0x78;
+VK_F10 = 0x79;
+VK_F11 = 0x7A;
+VK_F12 =0x7B;
+
+/* Get all the functions. */
+
+mod = dlopen("glext.dll");
+
+createglwin = dlfind(mod, "acreateglwin");
+killglwin = dlfind(mod, "akillglwin");
+handlemsg = dlfind(mod, "ahandlemsg");
+getinput = dlfind(mod, "agetinput");
+drawscene = dlfind(mod, "adrawscene");
+
+glClear = dlfind(mod, "aglClear");
+glClearColor = dlfind(mod, "aglClearColor");
+glShadeModel = dlfind(mod, "aglShadeModel");
+glLoadIdentity = dlfind(mod, "aglLoadIdentity");
+glTranslatef = dlfind(mod, "aglTranslatef");
+glRotatef = dlfind(mod, "aglRotatef");
+glBegin = dlfind(mod, "aglBegin");
+glEnd = dlfind(mod, "aglEnd");
+glEnable = dlfind(mod, "aglEnable");
+glDisable = dlfind(mod, "aglDisable");
+glLightfv = dlfind(mod, "aglLightfv");
+glColor3f = dlfind(mod, "aglColor3f");
+glVertex3f = dlfind(mod, "aglVertex3f");
+glPolygonMode = dlfind(mod, "aglPolygonMode");
+glTexCoord2f = dlfind(mod, "aglTexCoord2f");
+glMatrixMode = dlfind(mod, "aglMatrixMode");
+glFrustum = dlfind(mod, "aglFrustum");
+glCullFace = dlfind(mod, "aglCullFace");
+glFrontFace = dlfind(mod, "aglFrontFace");
+glDepthFunc = dlfind(mod, "aglDepthFunc");
+glHint = dlfind(mod, "aglHint");
+
+gluSphere = dlfind(mod, "agluSphere");
+gluCylinder = dlfind(mod, "agluCylinder");
+
+glutSolidTeapot = dlfind(mod, "aglutSolidTeapot");
+glutWireTeapot = dlfind(mod, "aglutWireTeapot");
+
+GetTickCount = dlfind(mod, "aGetTickCount");

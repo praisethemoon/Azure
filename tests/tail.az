@@ -1,0 +1,11 @@
+/* An example of proper tail recursion. */
+
+def recur(n)
+{
+	if (n<-50)
+		return;
+	println("n="+n);
+	recur(n-1);
+}
+
+recur(10000);

@@ -1,0 +1,2 @@
+This directory contains Azure test programs. They cover many of Azure's features
+like exception handling, multithreading, etc.

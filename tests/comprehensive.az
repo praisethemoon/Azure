@@ -1,0 +1,250 @@
+/* A script hotchpotch testing miscellaneous features of the language. */
+
+/*
+	The 8 queen problem. There are 92 solutions in total. The solution is in A.
+	A[i] is the column where the ith queen is placed.
+*/
+solution = [];
+line = [];
+diagonalp = [];
+diagonaln = [];
+
+count = 0;
+
+def clear(array)
+{
+	for (i=0; i<20; i++)
+		array[i] = 0;
+}
+
+def exam(array)
+{
+	for (i=1; i<=8; i++)
+		print(array[i]);
+}
+
+def placequeen(i)
+{
+	for (j=1; j<=8; j++)
+	{
+		if (line[j]==0 && diagonalp[i+j]==0 && diagonaln[i-j+8]==0)
+		{
+			solution[i] = j;
+			line[j] = 1;
+			diagonalp[i+j] = 1;
+			diagonaln[i-j+8] = 1;
+			if (i<8)
+				placequeen(i+1);
+			else
+			{
+				print("Solution"..count);
+				print(":");
+				exam(solution);
+				print("\n");
+				//inputc();
+				count++;
+			}
+			line[j] = 0;
+			diagonalp[i+j] = 0;
+			diagonaln[i-j+8] = 0;
+		}
+	}
+}
+
+clear(solution);
+clear(line);
+clear(diagonalp);
+clear(diagonaln);
+
+println("//////////////////////////////////////////////////////////////");
+println("// The 8 queen problem. There are 92 solutions in total.");
+println("// ************ Now have fun with it! ************");
+println("// Press ENTER to show the next solution.");
+println("//////////////////////////////////////////////////////////////");
+placequeen(1);
+print("\n");
+
+/* An example of time logic. */
+def domul(x)
+{
+	ret = x*1.0001;
+	return ret;
+}
+var asdfas, asdf;
+start_time = time();
+last_update_time = 0;
+mul = 1.0;
+println("Calculation starting...");
+for (i=0; i<1000; i++)
+	for (j=0; j<500; j++)
+{
+	var a,b,c;
+	if (mul<20)
+		mul = domul(mul);
+	current_time = time();
+	if (last_update_time!=current_time)
+	{
+		println(".");
+		last_update_time = current_time;
+	}
+}
+end_time = time();
+elapsed_time = end_time-start_time;
+print("Time elapsed:");
+print(elapsed_time);
+println("secs");
+print(mul);
+print("\n");
+
+/* An example of associative arrays. */
+def foo()
+{
+	a = [];
+	b = 1;
+	for (i=0; i<5; i++)
+		a[i] = [1,2,3,4,5];
+	a[0][2] = 1.2345;
+	a[0][3] = "Hello cell.";
+	for (i=0; i<5; i++)
+		for (j=0; j<5; j++)
+		{
+			b++;
+			print(a[i][j]++);
+		}
+}
+
+def fib(n)
+{
+	return n==0?0:n==1?1:fib(n-1)+fib(n-2);
+}
+
+foo();
+
+asso_a = [];
+for (i=0; i<10; i++)
+	asso_a[i] = fib(i);
+for (i=0; i<10; i++)
+	for (j=0; j<=0;)
+	{
+		print(asso_a[9-i]*1.0);
+		j++;
+	}
+print("\n");
+
+i = 0;
+while (1)
+{
+	if (i>5)
+		break;
+	i++;
+}
+print(i);
+print("\n");
+
+/* An example of bubble sort. */
+bsort_a = [1, 9, 8, 1, 6, 5.5, 4, 3, 2, 7];
+def bsort_exam(t)
+{
+	for (i=0; i<10; i++)
+		print(t[i]);
+}
+def bsort(t)
+{
+	for (j=0; j<10; j++)
+		for (i=0; i<9-j; i++)
+		if (t[i]>t[i+1])
+		{
+			temp = t[i];
+			t[i] = t[i+1];
+			t[i+1] = temp;
+		}
+}
+bsort(bsort_a);
+bsort_exam(bsort_a);
+print("\n");
+
+/* An example of complex numbers. */
+complex_a = [1.0, 2.5];
+complex_b = [2.0, 4.0];
+
+def addcom(a,b)
+{
+	c = [];
+	c[0] = a[0]+b[0];
+	c[1] = a[1]+b[1];
+	return c;
+}
+
+t = addcom([3.2,1], [7,8]);
+print(t[0]);
+print(t[1]);
+print("\n");
+
+def recur(n)
+{
+	if (n==0)
+		return;
+	println(n);
+	recur(n-1);
+}
+
+def dosomething(n)
+{
+	println("Entering dosomething");
+	for (i=0; i<10; i++)
+		println(i);
+	yield;
+	println("Resuming the function");
+}
+
+def dosomethingelse(n)
+{
+	println("co1");
+	for (i=0, sum1=0; i<10; sum1+=i,i++);
+	print(sum1+"\n");
+	recur(5);
+	yield;
+	println("co2");
+	yield;
+	println("co3");
+}
+
+thread1 = create(dosomethingelse, 1, 1);
+thread2 = create(dosomething, 1, 1);
+println("Hello coroutine.");
+resume(thread1);
+println("m1");
+resume(thread2);
+resume(thread1);
+println("m2");
+resume(thread2);
+resume(thread1);
+println("m3");
+
+/* An example of exception handling. */
+def exception_foo1(n)
+{
+	print("entering foo1."+"\n");
+	throw "exception occurred in foo1\n";
+	print("exiting foo1."+"\n");
+}
+
+def exception_foo(n)
+{
+	print("entering foo."+"\n");
+	exception_foo1(n);
+	print("exiting foo."+"\n");
+}
+
+def exception_prefoo(n)
+{
+	print("entering prefoo."+"\n");
+	var e;
+	try
+		exception_foo(n);
+	catch (e)
+		print(e);
+	print("exiting prefoo."+"\n");
+}
+exception_prefoo(10);
+print("\n");

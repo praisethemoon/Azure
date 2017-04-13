@@ -1,0 +1,25 @@
+/* Use recursive functions to solve the classical Hanoi tower problem. */
+steps = 0;
+
+def move(getone, putone)
+{
+	print(getone);
+	print("->");
+	println(putone);
+	steps++;
+}
+
+def hanoi(n, one, two, three)
+{
+	if (n==1) move(one, three);
+	else
+	{
+	hanoi(n-1, one, three, two);
+	move(one, three);
+	hanoi(n-1, two, one, three);
+	}
+}
+
+/* Move 8 disks from pole "A", via pole "B", to pole "C". */
+hanoi(10, "A", "B", "C");
+println(steps+" steps in total.");

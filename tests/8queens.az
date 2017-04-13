@@ -1,0 +1,60 @@
+/*
+	The 8 queen problem. There are 92 solutions in total. The solution is in A.
+	A[i] is the column where the ith queen is placed.
+*/
+var solution = [];
+line = [];
+diagonalp = [];
+diagonaln = [];
+
+count = 0;
+
+def clear(array)
+{
+	for (i=0; i<20; i++)
+		array[i] = 0;
+}
+
+def exam(array)
+{
+	for (i=1; i<=8; i++)
+		print(array[i]+" ");
+}
+
+def placequeen(i)
+{
+	for (j=1; j<=8; j++)
+	{
+		if (line[j]==0 && diagonalp[i+j]==0 && diagonaln[i-j+8]==0)
+		{
+			solution[i] = j;
+			line[j] = 1;
+			diagonalp[i+j] = 1;
+			diagonaln[i-j+8] = 1;
+			if (i<8)
+				placequeen(i+1);
+			else
+			{
+				print("Solution"+count+": ");
+				exam(solution);
+				inputc();
+				count++;
+			}
+			line[j] = 0;
+			diagonalp[i+j] = 0;
+			diagonaln[i-j+8] = 0;
+		}
+	}
+}
+
+clear(solution);
+clear(line);
+clear(diagonalp);
+clear(diagonaln);
+
+print("//////////////////////////////////////////////////////////////\n");
+print("// The 8 queen problem. There are 92 solutions in total.\n");
+print("// ************ Now have fun with it! ************\n");
+print("// Press ENTER to show the next solution.\n");
+print("//////////////////////////////////////////////////////////////\n");
+placequeen(1);

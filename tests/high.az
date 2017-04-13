@@ -1,0 +1,62 @@
+/* High order functions. */
+
+def doit(f,p1,p2)
+{
+	return f(p1,p2);
+}
+def sum1(x,y)
+{
+	return x+y;
+}
+def minus(x,y)
+{
+	return x-y;
+}
+def msg(str)
+{
+	print(str);
+}
+
+def Denis(str)
+{
+	print(str.."Denis.");
+}
+def Jin(str)
+{
+	print(str.."Jin.");
+}
+def gen()
+{
+	return Denis;
+}
+def gengen()
+{
+	return gen;
+}
+
+gengen()()("Hello ");
+Denis("Hello ");
+print(doit(sum1,1,122));
+a = sum1;
+print(a(1.0,2.0));
+
+def sum(x,y)
+{
+	var ret;
+	ret = x+y;
+	return ret;
+}
+
+def factor(n)
+{
+	return n==1?1:n*factor(n-1);
+}
+
+a = sum;
+b = println;
+c = factor;
+b(c(c(a(1,2))));
+print(c(c(a(1,2))));
+println("Hello.");
+b = print;
+b("Hello again.");

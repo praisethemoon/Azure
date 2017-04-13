@@ -1,0 +1,15 @@
+/* Coroutine example 1. */
+
+factor = 10;
+
+def dosomething(n,m)
+{
+	println(n*factor);
+	yield;
+	println(m);
+}
+
+cr1 = create(dosomething, 2, 1.234, "hello world");
+resume(cr1);
+println("back to the main thread");
+resume(cr1);

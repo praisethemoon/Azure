@@ -1,0 +1,16 @@
+// class definition
+class person
+{
+private:
+	name, age;
+public:
+	create();
+	def setname(newname): name=newname.
+	def setage(newage): age=newage.
+	def sayhello(): println("Hello world.").
+}
+
+// a new function definition
+def hello(msg):
+println(msg+" from Azure.").
+

@@ -1,0 +1,48 @@
+/*
+	Several small algorithms including: Fibonacci, Newton's iteration, and PI.
+*/
+
+def power(x,y)
+{
+	a = 1;
+	while (y>=1)
+	{
+		a = a*x;
+		y = y-1;
+	}
+	return a;
+}
+
+def nth_item(n)
+{
+	return power(-1.0,n+1)/((2*n-1)*power(3.0,n-1));
+}
+
+/* Square root using newton's iteration algorithm. */
+def sqrt(n, iteration)
+{
+	ret = 1.0;
+	for (i=0; i<iteration; i++)
+		ret = (ret+n/ret)/2;
+	return ret;
+}
+
+/* Calculate PI's value. */
+def pi(precision)
+{
+	for (ret=0.0, i=1; i<precision; i++)
+		ret += nth_item(i);
+	return ret*2*sqrt(3,20);
+}
+
+/* The Fibonacci array. */
+def fib(n)
+{
+	return n<2?n:fib(n-1)+fib(n-2);
+}
+
+print("Fibonacci:");
+for (j=1; j<10; j++)
+	print(fib(j)+" ");
+print("\nPi:");
+print(pi(13));

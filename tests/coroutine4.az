@@ -1,0 +1,42 @@
+/* Coroutine example 4. */
+
+def recur(n)
+{
+	if (n==0)
+		return;
+	println(n);
+	recur(n-1);
+}
+
+def dosomething(n)
+{
+	println("Entering dosomething");
+	for (i=0; i<10; i++)
+		println(i);
+	yield;
+	println("Resuming the function");
+}
+
+def dosomethingelse(n)
+{
+	println("co1");
+	for (i=0, sum1=0; i<10; sum1+=i,i++);
+	print(sum1+"\n");
+	recur(5);
+	yield;
+	println("co2");
+	yield;
+	println("co3");
+}
+
+thread1 = create(dosomethingelse, 1, 1);
+thread2 = create(dosomething, 1, 1);
+println("Hello coroutine.");
+resume(thread1);
+println("m1");
+resume(thread2);
+resume(thread1);
+println("m2");
+resume(thread2);
+resume(thread1);
+println("m3");

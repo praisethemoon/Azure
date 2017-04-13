@@ -1,0 +1,31 @@
+/* An example of time logic. */
+
+def domul(x)
+{
+	ret = x*1.0001;
+	return ret;
+}
+var asdfas, asdf;
+start_time = time();
+last_update_time = 0;
+mul = 1.0;
+println("Calculation starting...");
+for (i=0; i<500; i++)
+	for (j=0; j<1000; j++)
+{
+	var a,b,c;
+	if (mul<20)
+		mul = domul(mul);
+	current_time = time();
+	if (last_update_time!=current_time)
+	{
+		println(".");
+		last_update_time = current_time;
+	}
+}
+end_time = time();
+elapsed_time = end_time-start_time;
+print("Time elapsed:");
+print(elapsed_time);
+println("secs");
+print(mul);

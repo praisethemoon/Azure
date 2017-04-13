@@ -1,0 +1,20 @@
+/* An example of the foreach statement. */
+
+var key,value;
+
+/* Print out all the key/value pairs in the hash table. */
+s = ["name":"scv", "gender":"male", "age":18, "address":"Utah"];
+println("Personal profile:");
+foreach (key,value in s)
+{
+	print(key);
+	print(":");
+	println(value);
+}
+
+/* Print out all the values in the array. */
+t = [];
+for (i=0; i<10; i++)
+	t[i] = i;
+foreach (value in t)
+	println(value);

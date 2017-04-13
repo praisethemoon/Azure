@@ -1,0 +1,24 @@
+/*
+	An example of bubble sort. The array to be sorted contains both integers and
+	floats.
+*/
+
+numbers = [1, 9, 8, 1.9, 6, 5.5, 4, 3, 2, 7];
+
+def bsort(t)
+{
+	for (j=0; j<10; j++)
+		for (i=0; i<9-j; i++)
+		if (t[i]>t[i+1])
+		{
+			temp = t[i];
+			t[i] = t[i+1];
+			t[i+1] = temp;
+		}
+}
+
+bsort(numbers);
+
+var v;
+foreach (v in numbers)
+	print(v+" ");

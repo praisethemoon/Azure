@@ -1,0 +1,23 @@
+/* Read and write files with exception handling. */
+
+println("Please enter the file name to be opened:");
+fname = inputs();
+var e;
+try
+{
+	f = fopen(fname, "r");
+	buf = fread(f);
+	print(buf);
+	fclose(f);
+}
+catch (e)
+	print("Cannot open file!\n");
+
+try
+{
+	f = fopen("data.txt", "a");
+	fwrite(f, "Have some cheese~~, Hide and seek.T_T");
+	fclose(f);
+}
+catch (e)
+	print("Cannot open file!\n");

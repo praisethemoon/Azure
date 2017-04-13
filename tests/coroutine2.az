@@ -1,0 +1,17 @@
+/* Coroutine example 2. */
+
+def dosomething(n)
+{
+	for (i=0; i<10; i++)
+	{
+		if (i==5)
+			yield 100;
+		println(i);
+	}
+}
+
+co1 = create(dosomething);
+resume(co1);
+println("m1");
+resume(co1);
+println("m2");

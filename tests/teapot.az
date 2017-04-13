@@ -1,0 +1,192 @@
+/* A rendering demo using Azure's Win32 OpenGL extension. */
+use "inc/gl.azi"
+
+/* Screen properties. */
+windowname = "Azure Opengl extension demo -- Utah teapot.";
+x = 800; y = 600; colordepth = 32; fullscreen = 0;
+
+starttime = GetTickCount();
+frames = 0;
+
+/* Lights 1, 2, 3, and 4. */
+LightAmbient = [0.0, 0.0, 0.0, 1.0];
+LightDiffuse = [1.0, 0.0, 0.0, 1.0];
+LightPosition = [15.0, 0.0, 15.0, 1.0];
+LightEnabled = 0;
+
+LightAmbient2 = [0.0, 0.0, 0.0, 1.0];
+LightDiffuse2 = [0.0, 1.0, 0.0, 1.0];
+LightPosition2 = [-15.0, 0.0, 15.0, 1.0];
+LightEnabled2 = 0;
+
+LightAmbient3 = [0.0, 0.0, 0.0, 1.0];
+LightDiffuse3 = [0.0, 0.0, 1.0, 1.0];
+LightPosition3 = [0.0, 15.0, 15.0, 1.0];
+LightEnabled3 = 1;
+
+LightAmbient4 = [0.0, 0.0, 0.0, 1.0];
+LightDiffuse4 = [1.0, 1.0, 1.0, 1.0];
+LightPosition4 = [0.0, 0.0, 15.0, 1.0];
+LightEnabled4 = 0;
+
+/* Shading properties. */
+shade = GL_SMOOTH;
+polygonmode = GL_LINE;
+
+/* Animation logic variables. */
+paused = 0;
+pausetime = 0;
+pausetime1 = 0;
+
+/* Setting up our studio: placing lights and setting other properties. */
+def initgl()
+{
+	glLoadIdentity();
+	glShadeModel(shade);
+	glPolygonMode(GL_FRONT_AND_BACK, polygonmode);
+	if (LightEnabled)
+	{
+		glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
+		glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
+		glEnable(GL_LIGHT1);
+	}
+	else
+		glDisable(GL_LIGHT1);
+	if (LightEnabled2)
+	{
+		glLightfv(GL_LIGHT2, GL_AMBIENT, LightAmbient2);
+		glLightfv(GL_LIGHT2, GL_DIFFUSE, LightDiffuse2);
+		glLightfv(GL_LIGHT2, GL_POSITION, LightPosition2);
+		glEnable(GL_LIGHT2);
+	}
+	else
+		glDisable(GL_LIGHT2);
+	if (LightEnabled3)
+	{
+		glLightfv(GL_LIGHT3, GL_AMBIENT, LightAmbient3);
+		glLightfv(GL_LIGHT3, GL_DIFFUSE, LightDiffuse3);
+		glLightfv(GL_LIGHT3, GL_POSITION, LightPosition3);
+		glEnable(GL_LIGHT3);
+	}
+	else
+		glDisable(GL_LIGHT3);
+	if (LightEnabled4)
+	{
+		glLightfv(GL_LIGHT4, GL_AMBIENT, LightAmbient4);
+		glLightfv(GL_LIGHT4, GL_DIFFUSE, LightDiffuse4);
+		glLightfv(GL_LIGHT4, GL_POSITION, LightPosition4);
+		glEnable(GL_LIGHT4);
+	}
+	else
+		glDisable(GL_LIGHT4);
+	glEnable(GL_LIGHTING);
+}
+
+/* The drawing function. */
+def draw()
+{
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	for (j=1; j<=10; j++)
+	{
+		glLoadIdentity();
+		glTranslatef(-15.0+j*3,0.0,-3.0*j);
+		if (!paused)
+			glRotatef((GetTickCount()-starttime-pausetime1)/50.0, 1.0, 0.0, 0.0);
+		else
+			glRotatef((pausetime-starttime-pausetime1)/50.0, 1.0, 0.0, 0.0);
+		if (j%2==0)
+			if (polygonmode == GL_FILL)
+				glutSolidTeapot(2.0);
+			else
+				glutWireTeapot(2.0);
+		else
+			gluSphere(3.0,50,50);
+	}
+	drawscene();
+	frames++;
+}
+
+/* Loop for message and input handling. */
+def loop(draw, windowname)
+{
+	while (!handlemsg())
+	{
+		/* Handle user input. */
+		switch (getinput(windowname))
+		{
+		/* F1 */
+		case VK_F1:
+			killglwin();
+			fullscreen = !fullscreen;
+			createglwin(windowname,x,y,colordepth,fullscreen);
+			initgl();
+			break;
+		/* 'R' or 'r' */
+		case 0x52:
+		case 0x72:
+			LightEnabled = !LightEnabled;
+			initgl();
+			break;
+		/* 'G' or 'g' */
+		case 0x47:
+		case 0x67:
+			LightEnabled2 = !LightEnabled2;
+			initgl();
+			break;
+		/* 'B' or 'b' */
+		case 0x42:
+		case 0x62:
+			LightEnabled3 = !LightEnabled3;
+			initgl();
+			break;
+		/* 'W' or 'w' */
+		case 0x57:
+		case 0x77:
+			LightEnabled4 = !LightEnabled4;
+			initgl();
+			break;
+		/* 'S' or 's' */
+		case 0x53:
+		case 0x73:
+			shade = (shade==GL_FLAT?GL_SMOOTH:GL_FLAT);
+			initgl();
+			break;
+		/* 'O' or 'o' */
+		case 0x4F:
+		case 0x6F:
+			polygonmode = (polygonmode==GL_FILL?GL_LINE:GL_FILL);
+			initgl();
+			break;
+		/* 'P' or 'p' */
+		case 0x50:
+		case 0x70:
+			paused = !paused;
+			if (paused)
+				pausetime = GetTickCount();
+			else
+				pausetime1 += GetTickCount()-pausetime;
+			break;
+		/* ESCAPE */
+		case VK_ESCAPE:
+			return;
+		}
+		draw();
+	}
+}
+
+println("\"Utah teapots\" and spheres lit up by one or more of four lights: red, green, blue, and white.
+Key controls:
+'r', 'g', 'b', 'w' to turn on/off red, green, blue, or white lights;
+'s' to switch between flat/smooth rendering modes;
+'o' to switch between line/fill polygon rendering modes;
+'p' to pause the animation;
+F1 to switch between fullscreen/windowed modes;
+ESCAPE to exit");
+createglwin(windowname,x,y,colordepth,fullscreen);
+initgl();
+loop(draw, windowname);
+killglwin();
+println(frames+" frames rendered, "+frames*1000.0/(GetTickCount()-starttime)+" frames per second.");
+dlclose(mod);

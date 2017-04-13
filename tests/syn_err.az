@@ -1,0 +1,23 @@
+/* This file intentionally contains syntax errors. */
+
+var i,j;
+
+// create an empty table
+tbl = [];
+// and expand it to a 2-dimension array
+for (i=0; i<5; i++)
+	tbl[i] = [1,2,3,4,5];
+// modify some of its cells, and it becomes an associative array
+tbl[0][2] = 1.2345;
+tbl[0][3] = "Hello cell.";
+
+// print out all of its cells.
+oreach (i in tbl)
+{
+	foreach (j in i)
+	{
+		print(j);
+		print(" ");
+	}
+	println("");
+}

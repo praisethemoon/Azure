@@ -1,0 +1,45 @@
+/* A testing example for the string library, including regular expression functionalities. */
+
+// string length
+str = "Hello world.";
+println("The length of \""+str+"\" is: "+strlen(str));
+// character -> string
+println(chr(56));
+// convert a string to lower case
+println(strlwr("AsdF"));
+// convert a string to upper case
+println(strupr("AsdF"));
+// make a string copy
+println(strcpy("AsdF"));
+// get a sub string given the range
+println(strsub("AsdF"), 1, 2);
+// repeat "hello " five times
+println(strrep("hello ", 5));
+
+email = '(\a|\d)*@\a*\.com';	// an email pattern ended in "edu"
+exclude = '[^eof]+';		// a string pattern without letter 'e', 'o', and 'f'
+exclude1 = '[^a-f]+';		// a string pattern without letter 'a' to 'f'
+id = '\a+';
+at = '@';
+edu = '\a+\.edu';
+
+// regular expression matching
+if (strmat("lgc@aaa.com", email))
+	println("match");
+else
+	println("unmatch");
+
+// enumerate all the substrings that match the pattern
+var v;
+foreach (v in strfnd("scvlin@usu.edu scv@usu.edu scvlin@usuedu scv@usu.edu", id+at+edu))
+	println(v);
+
+// replace all the substrings that match the pattern
+println(strrpl("Ah12212hh2121hF", '\d+', "num"));
+
+// seperate a string using specified seperators
+foreach (str in strsep("hello world", " \t\n\r"))
+	println(str);
+
+// collect garbage
+collectgarbage();

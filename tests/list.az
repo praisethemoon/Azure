@@ -1,0 +1,19 @@
+/*
+	A simple link list. a, b, and c are nodes in the list, and they all have
+	two fields: value and next. The list structure is: a->b->c.
+*/
+
+a = ["value":1.23];
+b = ["value":5.67];
+c = ["value":"the end"];
+a["next"] = b;
+b["next"] = c;
+
+// t points to the beginning of the list.
+t = a;
+// traverse the list.
+while (t)
+{
+	print(t["value"]+" ");
+	t = t["next"];
+}

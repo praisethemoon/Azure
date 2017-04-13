@@ -1,0 +1,55 @@
+This document provides guidelines on how to build Azure binaries on several
+platforms.
+
+>> Microsfot Windows:
+This package comes along with a Microsoft Visual C++ 6.0 project file with
+debug and release configurations. Using the project file, you can build a
+clean binary under the release mode. Later versions of Visual C++ should be
+compatible with this project file and build the Azure binary with no problem.
+
+If you are using Borland C++ Builder 6.0, create a console project with Azure's
+source to build the binary. To do this, select File->New->Other, and then
+choose the "Console Wizard" item in the "New" tab of the "New Items" dialog.
+Then the Console Wizard pops up, press ok to create the project. We then need
+to add all the Azure's source to the project. Select Project->Add to Project, or
+press SHIFT-F11 to call up the "Add to project" dialog to add the necessary
+files. Once this is ready, simply following the environment's routine to build
+the project.
+
+For Dev-C++ users, do as follows (take Dev-C++ 4.9.9.2 as an example). Select
+File->New->Project, the choose "Console Application" and "C Project", then
+press OK to create the project. After the project is created, add all the
+necessary source files to the project, then select Execute->Compile or press
+CONTROL-F9 to compile the project. Then select Execute->Run or press
+CONTROL-F10 to run it.
+
+>> Linux/Unix systems:
+This package comes along with a make file under the src directory. Once the
+package has been zipped in place, go to that directory, and type "make". If you
+already have gcc installed, the binary should appear.
+
+>> Apple MacOS X:
+Again we assume gcc is installed. Just go to the src directory and type
+"make -f MAKEFILE". If the system prompts that "<malloc.h> cannot be found",
+that is because Apple has already implemented the functionalities somewhere
+else other than <malloc.h>. To resolve this, simply define the compiling
+directive "MAC_OSX" in "azure.h" and rebuild again.
+
+List of files for building Windows interpreter binary:
+cconwin.c ccorelib.c ccoroutine.c cdlwin.c azure.c cerror.c cexception.c cgc.c
+cgen.c clex.c clib.c clibio.c clibmath.c clibstr.c clibsys.c cparse.c cregex.c
+ctable.c cutil.c cvm.c main.c
+
+List of files for building Linux/Unix/MacOS interpreter binary:
+cconlin.c ccorelib.c ccoroutine.c cdllin.c azure.c cerror.c cexception.c cgc.c
+cgen.c clex.c clib.c clibio.c clibmath.c clibstr.c clibsys.c cparse.c cregex.c
+ctable.c cutil.c cvm.c main.c
+
+To test out the OpenGL binding on Windows, do the following:
+Make sure the AZ_ENABLE_DYNAMIC_LOADING compiling switch is turned on. To do
+this, open src\azure.h and define AZ_ENABLE_DYNAMIC_LOADING. Then build the
+OpenGL extension dll from the files under the ext\OpenGL directory with the
+name "glext.dll", and place it within the same directory as Azure's
+interpreter. Then execute the script "glwin.cls" under the tests directory.
+Note that the Azure's interpreter and the extension should be built by the same
+compiler, otherwise problems might occur regarding loading the dynamic library.

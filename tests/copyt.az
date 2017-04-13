@@ -1,0 +1,37 @@
+// Deep-copy a table.
+def copytable(t)
+{
+	s = [];
+	for (i=0; i<tablelength(t); i++)
+		if (type(t[i])=="table")
+			s[i] = copytable(t[i]);
+		else if (type(t[i])=="string")
+			s[i] = strcpy(t[i]);
+		else
+			s[i] = t[i];
+	return s;
+}
+
+def printtab(t)
+{
+	print("[");
+	for (i=0; i<tablelength(t); i++)
+	{
+		if (type(t[i])=="table")
+			printtab(t[i]);
+		else
+			print(t[i]);
+		if (i<tablelength(t)-1)
+			print(",");
+	}
+	print("]");
+}
+
+tab1 = ["Goodie", ["Alexandre", "Troy"], "Helen"];
+tab = [12,34,56,78,90,100,101,tab1];
+a = [tab, 0,1,2,3,4,"hello"];
+b = copytable(a);
+a = nil;
+collectgarbage();
+printtab(b);
+println("");

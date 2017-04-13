@@ -1,0 +1,22 @@
+/* Exception handling example 3. */
+
+def foo(n)
+{
+	if (n==0)
+		return;
+	if (n==10)
+		throw "n==10 exception.\n";
+	print(n+"\n");
+	foo(n-1);
+}
+
+def prefoo(n)
+{
+	var e;
+	try
+		foo(n);
+	catch (e)
+		print(e);
+}
+
+prefoo(100);

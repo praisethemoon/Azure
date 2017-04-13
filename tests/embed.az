@@ -1,0 +1,32 @@
+var g1,g2;
+
+def sum(x,y)
+{
+	return x+y;
+}
+
+def sub(x,y)
+{
+	println("g1's value is "+g1);
+	println("g2's value is "+g2);
+	return x-y;
+}
+
+def mul(x,y)
+{
+	return x*y;
+}
+
+def echo(k,v)
+{
+	println(k);
+	println(v);
+}
+
+def hi(name)
+{
+	for (i=0; i<10; i++)
+		println("Hello "+name);
+}
+
+println("This script is for testing embedding only.");

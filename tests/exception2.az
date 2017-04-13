@@ -1,0 +1,30 @@
+/* Exception handling example 2. */
+
+def foo(m,n)
+{
+	var e;
+	//print(m/n+"\n");
+	throw "Exception here!\n";
+	print("Exiting foo.\n");
+}
+
+def prefoo(m,n)
+{
+	foo(m,n);
+	print("Exiting prefoo.\n");
+}
+
+def bar()
+{
+	var e;
+	try
+	{
+		print("going to do something dangerous.\n");
+		prefoo(4,0);
+	}
+	catch (e)
+		print(e);
+	print("Exiting bar.\n");
+}
+
+bar();

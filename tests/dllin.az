@@ -1,0 +1,15 @@
+/* This script demostrates dynamic module loading under Linux. */
+
+var e;
+try
+{
+	mod = dlopen("./ext.so.1");
+	sum = dlfind(mod, "sum");
+	println(sum(1234,2345));
+	sub = dlfind(mod, "sub");
+	println(sub(1234,2345));
+	dlclose(mod);
+}
+catch (e)
+	println("Something wrong in loading the library.");
+print("Back on the normal track.");

@@ -1,0 +1,23 @@
+/* An example of tables. */
+def new_person(name, age, gender)
+{
+	a = [0];
+	a["name"] = name;
+	a["age"] = age;
+	a["gender"] = gender;
+	return a;
+}
+
+def profile(p)
+{
+	print(p["name"]+" ");
+	print(p["age"]+" ");
+	println(p["gender"]);
+}
+
+me = new_person("scv", 18, "Male");
+you = new_person("prb", 18, "Unknown");
+println("I am:");
+profile(me);
+println("You are:");
+profile(you);

@@ -1,0 +1,28 @@
+/* Exception handling example 4. */
+
+def foo1(n)
+{
+	print("entering foo1."+"\n");
+	throw "exception occurred in foo1\n";
+	print("exiting foo1."+"\n");
+}
+
+def foo(n)
+{
+	print("entering foo."+"\n");
+	foo1(n);
+	print("exiting foo."+"\n");
+}
+
+def prefoo(n)
+{
+	print("entering prefoo."+"\n");
+	var e;
+	try
+		foo(n);
+	catch (e)
+		print(e);
+	print("exiting prefoo."+"\n");
+}
+
+prefoo(10);
